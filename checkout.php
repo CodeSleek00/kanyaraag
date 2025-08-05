@@ -111,8 +111,12 @@ require_once 'config/database.php';
     <script>
         // Load cart data from localStorage
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Checkout page loaded');
             const cartData = JSON.parse(localStorage.getItem('checkoutCart') || '[]');
             const cartTotal = parseFloat(localStorage.getItem('checkoutTotal') || 0);
+            
+            console.log('Cart data from localStorage:', cartData);
+            console.log('Cart total from localStorage:', cartTotal);
             
             if (cartData.length === 0) {
                 alert('Your cart is empty!');
