@@ -1,26 +1,6 @@
 <?php
 session_start();
 require_once 'config/database.php';
-
-// Check if cart data exists from POST request
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cartData = json_decode($_POST['cart_data'] ?? '[]', true);
-    $cartTotal = floatval($_POST['cart_total'] ?? 0);
-    
-    // Store in session for order processing
-    $_SESSION['checkout_cart'] = $cartData;
-    $_SESSION['checkout_total'] = $cartTotal;
-} else {
-    // If no POST data, try to get from session
-    $cartData = isset($_SESSION['checkout_cart']) ? $_SESSION['checkout_cart'] : [];
-    $cartTotal = isset($_SESSION['checkout_total']) ? $_SESSION['checkout_total'] : 0;
-}
-
-// If no cart data, redirect to home
-if (empty($cartData)) {
-    header('Location: index.php');
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +37,7 @@ if (empty($cartData)) {
                 <!-- Order items will be displayed here -->
             </div>
             <div style="border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem;">
-                <strong>Total: ₹<span id="order-total"><?php echo number_format($cartTotal); ?></span></strong>
+                <strong>Total: ₹<span id="order-total">0</span></strong>
             </div>
         </div>
 
@@ -129,54 +109,44 @@ if (empty($cartData)) {
     </div>
 
     <script>
-        // Display order items from session storage or localStorage fallback
+        // Load cart data from localStorage
         document.addEventListener('DOMContentLoaded', function() {
-            let cartData = <?php echo json_encode($cartData); ?>;
-            let cartTotal = <?php echo $cartTotal; ?>;
+            const cartData = JSON.parse(localStorage.getItem('checkoutCart') || '[]');
+            const cartTotal = parseFloat(localStorage.getItem('checkoutTotal') || 0);
             
-            // If no data from PHP session, try localStorage
-            if (!cartData || cartData.length === 0) {
-                const storedCart = localStorage.getItem('checkoutCart');
-                const storedTotal = localStorage.getItem('checkoutTotal');
-                
-                if (storedCart) {
-                    cartData = JSON.parse(storedCart);
-                    cartTotal = parseFloat(storedTotal || 0);
-                    
-                    // Store in PHP session for order processing
-                    fetch('store_cart_session.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            cart_data: cartData,
-                            cart_total: cartTotal
-                        })
-                    });
-                }
-            }
-            
-            const orderItems = document.getElementById('order-items');
-            
-            if (cartData && cartData.length > 0) {
-                let itemsHTML = '';
-                cartData.forEach(item => {
-                    itemsHTML += `
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>${item.name} x ${item.quantity}</span>
-                            <span>₹${(item.price * item.quantity).toLocaleString()}</span>
-                        </div>
-                    `;
-                });
-                orderItems.innerHTML = itemsHTML;
-                
-                // Update total display
-                document.getElementById('order-total').textContent = cartTotal.toLocaleString();
-            } else {
-                // No cart data, redirect to home
+            if (cartData.length === 0) {
+                alert('Your cart is empty!');
                 window.location.href = 'index.php';
+                return;
             }
+            
+            // Display order items
+            const orderItems = document.getElementById('order-items');
+            let itemsHTML = '';
+            
+            cartData.forEach(item => {
+                itemsHTML += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>${item.name} x ${item.quantity}</span>
+                        <span>₹${(item.price * item.quantity).toLocaleString()}</span>
+                    </div>
+                `;
+            });
+            
+            orderItems.innerHTML = itemsHTML;
+            document.getElementById('order-total').textContent = cartTotal.toLocaleString();
+            
+            // Store cart data in session for order processing
+            fetch('store_cart_session.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    cart_data: cartData,
+                    cart_total: cartTotal
+                })
+            });
         });
 
         // Handle payment method selection
