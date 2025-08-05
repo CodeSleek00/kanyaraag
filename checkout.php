@@ -2,9 +2,19 @@
 session_start();
 require_once 'config/database.php';
 
-// Check if cart data exists
-$cartData = isset($_SESSION['checkout_cart']) ? $_SESSION['checkout_cart'] : [];
-$cartTotal = isset($_SESSION['checkout_total']) ? $_SESSION['checkout_total'] : 0;
+// Check if cart data exists from POST request
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $cartData = json_decode($_POST['cart_data'] ?? '[]', true);
+    $cartTotal = floatval($_POST['cart_total'] ?? 0);
+    
+    // Store in session for order processing
+    $_SESSION['checkout_cart'] = $cartData;
+    $_SESSION['checkout_total'] = $cartTotal;
+} else {
+    // If no POST data, try to get from session
+    $cartData = isset($_SESSION['checkout_cart']) ? $_SESSION['checkout_cart'] : [];
+    $cartTotal = isset($_SESSION['checkout_total']) ? $_SESSION['checkout_total'] : 0;
+}
 
 // If no cart data, redirect to home
 if (empty($cartData)) {
@@ -119,12 +129,37 @@ if (empty($cartData)) {
     </div>
 
     <script>
-        // Display order items from session storage
+        // Display order items from session storage or localStorage fallback
         document.addEventListener('DOMContentLoaded', function() {
-            const cartData = <?php echo json_encode($cartData); ?>;
+            let cartData = <?php echo json_encode($cartData); ?>;
+            let cartTotal = <?php echo $cartTotal; ?>;
+            
+            // If no data from PHP session, try localStorage
+            if (!cartData || cartData.length === 0) {
+                const storedCart = localStorage.getItem('checkoutCart');
+                const storedTotal = localStorage.getItem('checkoutTotal');
+                
+                if (storedCart) {
+                    cartData = JSON.parse(storedCart);
+                    cartTotal = parseFloat(storedTotal || 0);
+                    
+                    // Store in PHP session for order processing
+                    fetch('store_cart_session.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            cart_data: cartData,
+                            cart_total: cartTotal
+                        })
+                    });
+                }
+            }
+            
             const orderItems = document.getElementById('order-items');
             
-            if (cartData.length > 0) {
+            if (cartData && cartData.length > 0) {
                 let itemsHTML = '';
                 cartData.forEach(item => {
                     itemsHTML += `
@@ -135,6 +170,12 @@ if (empty($cartData)) {
                     `;
                 });
                 orderItems.innerHTML = itemsHTML;
+                
+                // Update total display
+                document.getElementById('order-total').textContent = cartTotal.toLocaleString();
+            } else {
+                // No cart data, redirect to home
+                window.location.href = 'index.php';
             }
         });
 

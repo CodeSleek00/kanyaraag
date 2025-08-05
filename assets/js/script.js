@@ -134,12 +134,35 @@ function proceedToCheckout() {
         return;
     }
     
-    // Store cart data in session for checkout
-    sessionStorage.setItem('checkoutCart', JSON.stringify(cart));
-    sessionStorage.setItem('checkoutTotal', cartTotal);
-    
-    // Redirect to checkout page
-    window.location.href = 'checkout.php';
+    try {
+        // Create a form to submit cart data
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'checkout.php';
+        
+        // Add cart data as hidden inputs
+        const cartDataInput = document.createElement('input');
+        cartDataInput.type = 'hidden';
+        cartDataInput.name = 'cart_data';
+        cartDataInput.value = JSON.stringify(cart);
+        form.appendChild(cartDataInput);
+        
+        const cartTotalInput = document.createElement('input');
+        cartTotalInput.type = 'hidden';
+        cartTotalInput.name = 'cart_total';
+        cartTotalInput.value = cartTotal;
+        form.appendChild(cartTotalInput);
+        
+        // Submit the form
+        document.body.appendChild(form);
+        form.submit();
+    } catch (error) {
+        // Fallback: use localStorage and redirect
+        console.log('Form submission failed, using fallback method');
+        localStorage.setItem('checkoutCart', JSON.stringify(cart));
+        localStorage.setItem('checkoutTotal', cartTotal);
+        window.location.href = 'checkout.php';
+    }
 }
 
 // Show notification

@@ -127,7 +127,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <p><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra, India</p>
             </div>
         </div>
-    </section>
 
     <!-- Footer -->
     <footer>
