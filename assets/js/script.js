@@ -4,6 +4,7 @@ let cartTotal = 0;
 
 // Initialize cart on page load
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded, cart from localStorage:', cart);
     updateCartDisplay();
 });
 
@@ -15,21 +16,27 @@ function toggleCart() {
 
 // Add item to cart
 function addToCart(productId, productName, productPrice, regularPrice, discountPercentage) {
+    console.log('Adding to cart:', {productId, productName, productPrice, regularPrice, discountPercentage});
+    
     const existingItem = cart.find(item => item.id === productId);
     
     if (existingItem) {
         existingItem.quantity += 1;
+        console.log('Updated existing item quantity:', existingItem.quantity);
     } else {
-        cart.push({
+        const newItem = {
             id: productId,
             name: productName,
             price: productPrice,
             regularPrice: regularPrice,
             discountPercentage: discountPercentage,
             quantity: 1
-        });
+        };
+        cart.push(newItem);
+        console.log('Added new item to cart:', newItem);
     }
     
+    console.log('Cart after adding item:', cart);
     saveCart();
     updateCartDisplay();
     
@@ -61,11 +68,18 @@ function updateQuantity(productId, change) {
 
 // Save cart to localStorage
 function saveCart() {
+    console.log('Saving cart to localStorage:', cart);
     localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Verify it was saved
+    const savedCart = localStorage.getItem('cart');
+    console.log('Verified saved cart:', savedCart);
 }
 
 // Update cart display
 function updateCartDisplay() {
+    console.log('Updating cart display, current cart:', cart);
+    
     const cartItems = document.getElementById('cart-items');
     const cartCount = document.getElementById('cart-count');
     const cartSubtotalElement = document.getElementById('cart-subtotal');

@@ -136,5 +136,27 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
 
     <script src="assets/js/script.js"></script>
+    
+    <!-- Debug section -->
+    <div style="position: fixed; bottom: 10px; right: 10px; background: #333; color: white; padding: 10px; border-radius: 5px; font-size: 12px; z-index: 10000;">
+        <button onclick="testAddToCart()" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Test Add to Cart</button>
+        <button onclick="showCartDebug()" style="background: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-left: 5px;">Show Cart Debug</button>
+    </div>
+    
+    <script>
+        function testAddToCart() {
+            addToCart(999, 'Test Product', 999, 1299, 23);
+        }
+        
+        function showCartDebug() {
+            console.log('=== CART DEBUG INFO ===');
+            console.log('Cart array:', cart);
+            console.log('Cart total:', cartTotal);
+            console.log('localStorage cart:', localStorage.getItem('cart'));
+            console.log('localStorage checkoutCart:', localStorage.getItem('checkoutCart'));
+            console.log('localStorage checkoutTotal:', localStorage.getItem('checkoutTotal'));
+            alert('Check browser console (F12) for cart debug info');
+        }
+    </script>
 </body>
 </html> 
