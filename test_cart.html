@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Test - Kanyaraag</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 15px; margin: 5px; background: #e74c3c; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #c0392b; }
+        .cart-info { background: #f8f9fa; padding: 10px; border-radius: 3px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Cart Functionality Test</h1>
+    
+    <div class="test-section">
+        <h3>1. Add Items to Cart</h3>
+        <button onclick="addTestItem()">Add Test Product</button>
+        <button onclick="addAnotherItem()">Add Another Product</button>
+        <div id="cart-status" class="cart-info">Cart is empty</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. View Cart Data</h3>
+        <button onclick="viewCart()">View Cart</button>
+        <button onclick="clearCart()">Clear Cart</button>
+        <div id="cart-data" class="cart-info"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. Test Checkout</h3>
+        <button onclick="testCheckout()">Test Checkout</button>
+        <div id="checkout-status" class="cart-info"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>4. Debug Information</h3>
+        <button onclick="showDebugInfo()">Show Debug Info</button>
+        <div id="debug-info" class="cart-info"></div>
+    </div>
+
+    <script>
+        // Simulate cart functionality
+        let testCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        let testCartTotal = 0;
+        
+        function updateCartDisplay() {
+            const totalItems = testCart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-status').innerHTML = `Cart has ${totalItems} items`;
+        }
+        
+        function addTestItem() {
+            const item = {
+                id: Date.now(),
+                name: 'Test Product ' + (testCart.length + 1),
+                price: 999,
+                regularPrice: 1299,
+                discountPercentage: 23,
+                quantity: 1
+            };
+            
+            testCart.push(item);
+            testCartTotal += item.price;
+            
+            localStorage.setItem('cart', JSON.stringify(testCart));
+            updateCartDisplay();
+            
+            console.log('Added item:', item);
+            console.log('Cart total:', testCartTotal);
+        }
+        
+        function addAnotherItem() {
+            const item = {
+                id: Date.now() + 1,
+                name: 'Another Product',
+                price: 1499,
+                regularPrice: 1999,
+                discountPercentage: 25,
+                quantity: 1
+            };
+            
+            testCart.push(item);
+            testCartTotal += item.price;
+            
+            localStorage.setItem('cart', JSON.stringify(testCart));
+            updateCartDisplay();
+        }
+        
+        function viewCart() {
+            document.getElementById('cart-data').innerHTML = `
+                <strong>Cart Items:</strong><br>
+                ${testCart.map(item => `${item.name} - ₹${item.price} x ${item.quantity}`).join('<br>')}<br>
+                <strong>Total: ₹${testCartTotal}</strong>
+            `;
+        }
+        
+        function clearCart() {
+            testCart = [];
+            testCartTotal = 0;
+            localStorage.removeItem('cart');
+            updateCartDisplay();
+            document.getElementById('cart-data').innerHTML = 'Cart cleared';
+        }
+        
+        function testCheckout() {
+            if (testCart.length === 0) {
+                document.getElementById('checkout-status').innerHTML = 'Cart is empty!';
+                return;
+            }
+            
+            // Store cart data for checkout
+            localStorage.setItem('checkoutCart', JSON.stringify(testCart));
+            localStorage.setItem('checkoutTotal', testCartTotal);
+            
+            document.getElementById('checkout-status').innerHTML = `
+                Cart data stored for checkout<br>
+                Items: ${testCart.length}<br>
+                Total: ₹${testCartTotal}<br>
+                <a href="checkout.php" target="_blank">Open Checkout Page</a>
+            `;
+        }
+        
+        function showDebugInfo() {
+            const debugInfo = {
+                'localStorage cart': localStorage.getItem('cart'),
+                'localStorage checkoutCart': localStorage.getItem('checkoutCart'),
+                'localStorage checkoutTotal': localStorage.getItem('checkoutTotal'),
+                'testCart array': testCart,
+                'testCartTotal': testCartTotal,
+                'userAgent': navigator.userAgent,
+                'localStorage available': typeof(Storage) !== "undefined"
+            };
+            
+            document.getElementById('debug-info').innerHTML = `
+                <strong>Debug Information:</strong><br>
+                ${Object.entries(debugInfo).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join('<br>')}
+            `;
+        }
+        
+        // Initialize
+        updateCartDisplay();
+    </script>
+</body>
+</html> 
