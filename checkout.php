@@ -1,6 +1,48 @@
 <?php
 session_start();
 require_once 'config/database.php';
+
+// Check if user has cart session
+if (!isset($_SESSION['cart_session_id'])) {
+    header('Location: index.php');
+    exit();
+}
+
+$session_id = $_SESSION['cart_session_id'];
+
+// Get cart items from database
+$stmt = $pdo->prepare("SELECT c.*, p.image FROM cart c LEFT JOIN products p ON c.product_id = p.product_id WHERE c.session_id = ? ORDER BY c.created_at DESC");
+$stmt->execute([$session_id]);
+$cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// If no cart items, redirect to home
+if (empty($cart_items)) {
+    header('Location: index.php');
+    exit();
+}
+
+// Calculate totals
+$subtotal = 0;
+$total_discount = 0;
+$total_items = 0;
+
+foreach ($cart_items as $item) {
+    $regular_total = $item['regular_price'] * $item['quantity'];
+    $discounted_total = $item['unit_price'] * $item['quantity'];
+    $item_discount = $regular_total - $discounted_total;
+    
+    $subtotal += $regular_total;
+    $total_discount += $item_discount;
+    $total_items += $item['quantity'];
+}
+
+$final_total = $subtotal - $total_discount;
+
+// Store cart data in session for order processing
+$_SESSION['checkout_cart'] = $cart_items;
+$_SESSION['checkout_total'] = $final_total;
+$_SESSION['checkout_subtotal'] = $subtotal;
+$_SESSION['checkout_discount'] = $total_discount;
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +63,7 @@ require_once 'config/database.php';
                     <h1><a href="index.php" style="text-decoration: none; color: #e74c3c;">Kanyaraag</a></h1>
                 </div>
                 <div class="nav-links">
-                    <a href="index.php">Back to Shop</a>
+                    <a href="cart.php">Back to Cart</a>
                 </div>
             </div>
         </nav>
@@ -34,10 +76,28 @@ require_once 'config/database.php';
         <div style="background: #f8f9fa; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
             <h3>Order Summary</h3>
             <div id="order-items">
-                <!-- Order items will be displayed here -->
+                <?php foreach ($cart_items as $item): ?>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span><?php echo $item['product_name']; ?> x <?php echo $item['quantity']; ?></span>
+                        <span>₹<?php echo number_format($item['unit_price'] * $item['quantity']); ?></span>
+                    </div>
+                <?php endforeach; ?>
             </div>
             <div style="border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem;">
-                <strong>Total: ₹<span id="order-total">0</span></strong>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Subtotal:</span>
+                    <span>₹<?php echo number_format($subtotal); ?></span>
+                </div>
+                <?php if ($total_discount > 0): ?>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #27ae60;">
+                        <span>Discount:</span>
+                        <span>-₹<?php echo number_format($total_discount); ?></span>
+                    </div>
+                <?php endif; ?>
+                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem;">
+                    <span>Total:</span>
+                    <span>₹<?php echo number_format($final_total); ?></span>
+                </div>
             </div>
         </div>
 
@@ -109,50 +169,6 @@ require_once 'config/database.php';
     </div>
 
     <script>
-        // Load cart data from localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Checkout page loaded');
-            const cartData = JSON.parse(localStorage.getItem('checkoutCart') || '[]');
-            const cartTotal = parseFloat(localStorage.getItem('checkoutTotal') || 0);
-            
-            console.log('Cart data from localStorage:', cartData);
-            console.log('Cart total from localStorage:', cartTotal);
-            
-            if (cartData.length === 0) {
-                alert('Your cart is empty!');
-                window.location.href = 'index.php';
-                return;
-            }
-            
-            // Display order items
-            const orderItems = document.getElementById('order-items');
-            let itemsHTML = '';
-            
-            cartData.forEach(item => {
-                itemsHTML += `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                        <span>${item.name} x ${item.quantity}</span>
-                        <span>₹${(item.price * item.quantity).toLocaleString()}</span>
-                    </div>
-                `;
-            });
-            
-            orderItems.innerHTML = itemsHTML;
-            document.getElementById('order-total').textContent = cartTotal.toLocaleString();
-            
-            // Store cart data in session for order processing
-            fetch('store_cart_session.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    cart_data: cartData,
-                    cart_total: cartTotal
-                })
-            });
-        });
-
         // Handle payment method selection
         document.getElementById('payment_method').addEventListener('change', function() {
             const paymentDetails = document.getElementById('payment-details');

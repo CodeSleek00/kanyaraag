@@ -18,6 +18,23 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- Cart table for storing cart items
+CREATE TABLE IF NOT EXISTS `cart` (
+  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
+  `session_id` varchar(255) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `unit_price` decimal(10,2) NOT NULL,
+  `regular_price` decimal(10,2) NOT NULL,
+  `discount_percentage` int(3) DEFAULT 0,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`cart_id`),
+  UNIQUE KEY `session_product` (`session_id`, `product_id`),
+  FOREIGN KEY (`product_id`) REFERENCES `products`(`product_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Orders table
 CREATE TABLE IF NOT EXISTS `orders` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -140,6 +157,7 @@ INSERT INTO `products` (`name`, `description`, `regular_price`, `discount_price`
 -- Create indexes for better performance
 CREATE INDEX idx_products_category ON products(category);
 CREATE INDEX idx_products_status ON products(status);
+CREATE INDEX idx_cart_session ON cart(session_id);
 CREATE INDEX idx_orders_status ON orders(status);
 CREATE INDEX idx_orders_payment_status ON orders(payment_status);
 CREATE INDEX idx_orders_created_at ON orders(created_at);

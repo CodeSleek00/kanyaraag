@@ -2,6 +2,17 @@
 session_start();
 require_once 'config/database.php';
 
+// Generate session ID if not exists
+if (!isset($_SESSION['cart_session_id'])) {
+    $_SESSION['cart_session_id'] = uniqid('cart_', true);
+}
+
+// Get cart count
+$session_id = $_SESSION['cart_session_id'];
+$stmt = $pdo->prepare("SELECT SUM(quantity) as total_items FROM cart WHERE session_id = ?");
+$stmt->execute([$session_id]);
+$cart_count = $stmt->fetch(PDO::FETCH_ASSOC)['total_items'] ?? 0;
+
 // Fetch all active products
 $stmt = $pdo->query("SELECT * FROM products WHERE status = 'active' ORDER BY created_at DESC");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,8 +42,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="cart-icon">
-                    <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
-                    <span id="cart-count">0</span>
+                    <a href="cart.php" style="color: inherit; text-decoration: none;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count"><?php echo $cart_count; ?></span>
+                    </a>
                 </div>
             </div>
         </nav>
@@ -72,42 +85,20 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php endif; ?>
                         </div>
                         <div class="product-stock">Stock: <?php echo $product['stock']; ?></div>
-                        <button class="add-to-cart" onclick="addToCart(<?php echo $product['product_id']; ?>, '<?php echo addslashes($product['name']); ?>', <?php echo $product['discount_price'] ?: $product['regular_price']; ?>, <?php echo $product['regular_price']; ?>, <?php echo $product['discount_percentage']; ?>)">
-                            Add to Cart
-                        </button>
+                        <form method="POST" action="cart.php" style="margin: 0;">
+                            <input type="hidden" name="action" value="add_to_cart">
+                            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
         </div>
     </section>
-
-    <!-- Shopping Cart Sidebar -->
-    <div id="cart-sidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Shopping Cart</h3>
-            <button onclick="toggleCart()" class="close-cart">&times;</button>
-        </div>
-        <div id="cart-items" class="cart-items">
-            <!-- Cart items will be displayed here -->
-        </div>
-        <div class="cart-footer">
-            <div class="cart-summary">
-                <div class="cart-subtotal">
-                    <span>Subtotal:</span>
-                    <span>₹<span id="cart-subtotal">0</span></span>
-                </div>
-                <div class="cart-discount">
-                    <span>Discount:</span>
-                    <span>-₹<span id="cart-discount">0</span></span>
-                </div>
-                <div class="cart-total">
-                    <strong>Total: ₹<span id="cart-total">0</span></strong>
-                </div>
-            </div>
-            <button onclick="proceedToCheckout()" class="checkout-btn">Proceed to Checkout</button>
-        </div>
-    </div>
 
     <!-- About Section -->
     <section id="about" class="about">
@@ -127,6 +118,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <p><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra, India</p>
             </div>
         </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -134,29 +126,5 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p>&copy; 2024 Kanyaraag. All rights reserved.</p>
         </div>
     </footer>
-
-    <script src="assets/js/script.js"></script>
-    
-    <!-- Debug section -->
-    <div style="position: fixed; bottom: 10px; right: 10px; background: #333; color: white; padding: 10px; border-radius: 5px; font-size: 12px; z-index: 10000;">
-        <button onclick="testAddToCart()" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Test Add to Cart</button>
-        <button onclick="showCartDebug()" style="background: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-left: 5px;">Show Cart Debug</button>
-    </div>
-    
-    <script>
-        function testAddToCart() {
-            addToCart(999, 'Test Product', 999, 1299, 23);
-        }
-        
-        function showCartDebug() {
-            console.log('=== CART DEBUG INFO ===');
-            console.log('Cart array:', cart);
-            console.log('Cart total:', cartTotal);
-            console.log('localStorage cart:', localStorage.getItem('cart'));
-            console.log('localStorage checkoutCart:', localStorage.getItem('checkoutCart'));
-            console.log('localStorage checkoutTotal:', localStorage.getItem('checkoutTotal'));
-            alert('Check browser console (F12) for cart debug info');
-        }
-    </script>
 </body>
 </html> 
