@@ -129,6 +129,10 @@ function updateCartDisplay() {
 
 // Proceed to checkout
 function proceedToCheckout() {
+    console.log('Checkout function called');
+    console.log('Cart data:', cart);
+    console.log('Cart total:', cartTotal);
+    
     if (cart.length === 0) {
         showNotification('Your cart is empty!', 'error');
         return;
@@ -137,6 +141,9 @@ function proceedToCheckout() {
     // Store cart data in localStorage
     localStorage.setItem('checkoutCart', JSON.stringify(cart));
     localStorage.setItem('checkoutTotal', cartTotal);
+    
+    console.log('Cart data stored in localStorage');
+    console.log('Redirecting to checkout.php');
     
     // Redirect to checkout page
     window.location.href = 'checkout.php';
