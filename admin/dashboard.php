@@ -2,11 +2,9 @@
 session_start();
 require_once '../config/database.php';
 
-// Check if admin is logged in
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header('Location: login.php');
-    exit();
-}
+// Direct access to admin dashboard - login check removed
+$_SESSION['admin_logged_in'] = true;
+$_SESSION['admin_username'] = 'faiz';
 
 // Get statistics
 $stmt = $pdo->query("SELECT COUNT(*) as total_products FROM products");
