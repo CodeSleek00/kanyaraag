@@ -128,9 +128,9 @@ CREATE TABLE IF NOT EXISTS `categories` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert default admin user (username: admin, password: admin123)
+-- Insert default admin user (username: faiz, password: admin123)
 INSERT INTO `admin_users` (`username`, `password`, `email`, `full_name`, `role`) VALUES 
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@kanyaraag.com', 'Administrator', 'admin');
+('faiz', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'faiz@kanyaraag.com', 'Faiz Administrator', 'admin');
 
 -- Insert sample categories
 INSERT INTO `categories` (`name`, `description`) VALUES

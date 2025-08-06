@@ -97,9 +97,9 @@ echo "<li>Access your website at: " . $_SERVER['HTTP_HOST'] . dirname($_SERVER['
 echo "<li>Access admin panel at: " . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/admin/login.php</li>";
 echo "</ol>";
 
-echo "<h3>Default Admin Login:</h3>";
-echo "<p><strong>Username:</strong> admin<br>";
-echo "<strong>Password:</strong> admin123</p>";
+    echo "<h3>Default Admin Login:</h3>";
+    echo "<p><strong>Username:</strong> faiz<br>";
+    echo "<strong>Password:</strong> admin123</p>";
 
 echo "<h3>Sample Products:</h3>";
 echo "<p>The database includes sample products. You can manage them through the admin panel.</p>";

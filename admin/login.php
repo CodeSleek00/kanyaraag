@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 5px; font-size: 0.9rem; color: #666;">
             <strong>Default Login:</strong><br>
-            Username: admin<br>
+            Username: faiz<br>
             Password: admin123
         </div>
     </div>
