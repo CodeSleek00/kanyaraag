@@ -164,6 +164,58 @@ $recentOrders = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .logout-btn:hover {
             background: #c0392b;
         }
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .quick-action-btn {
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quick-action-btn:hover {
+            transform: translateY(-2px);
+        }
+        .stat-card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: relative;
+            }
+            .sidebar-menu {
+                display: flex;
+                overflow-x: auto;
+                padding: 0.5rem 0;
+            }
+            .sidebar-menu li {
+                margin-right: 0.5rem;
+                margin-bottom: 0;
+                white-space: nowrap;
+            }
+            .logout-btn {
+                position: static;
+                margin-top: 1rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
     </style>
 </head>
 <body>
@@ -187,30 +239,42 @@ $recentOrders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Main Content -->
         <div class="main-content">
-            <h1>Dashboard</h1>
-            <p>Welcome back, <?php echo $_SESSION['admin_username']; ?>!</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+                    <p>Welcome back, <strong><?php echo $_SESSION['admin_username']; ?></strong>! Here's your business overview.</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="products.php" style="background: #27ae60; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">
+                        <i class="fas fa-plus"></i> Add Product
+                    </a>
+                    <a href="orders.php" style="background: #3498db; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">
+                        <i class="fas fa-list"></i> View Orders
+                    </a>
+                </div>
+            </div>
 
             <!-- Statistics -->
             <div class="stats-grid">
-                <div class="stat-card products">
+                <div class="stat-card products" onclick="location.href='products.php'">
                     <i class="fas fa-box"></i>
                     <div class="stat-number"><?php echo $totalProducts; ?></div>
                     <div class="stat-label">Total Products</div>
                 </div>
                 
-                <div class="stat-card orders">
+                <div class="stat-card orders" onclick="location.href='orders.php'">
                     <i class="fas fa-shopping-cart"></i>
                     <div class="stat-number"><?php echo $totalOrders; ?></div>
                     <div class="stat-label">Total Orders</div>
                 </div>
                 
-                <div class="stat-card revenue">
+                <div class="stat-card revenue" onclick="location.href='reports.php'">
                     <i class="fas fa-rupee-sign"></i>
                     <div class="stat-number">₹<?php echo number_format($totalRevenue); ?></div>
                     <div class="stat-label">Total Revenue</div>
                 </div>
                 
-                <div class="stat-card pending">
+                <div class="stat-card pending" onclick="location.href='orders.php?status=pending'">
                     <i class="fas fa-clock"></i>
                     <div class="stat-number"><?php echo $pendingOrders; ?></div>
                     <div class="stat-label">Pending Orders</div>
@@ -245,7 +309,9 @@ $recentOrders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
                 
                 <div style="text-align: center; margin-top: 1rem;">
-                    <a href="orders.php" class="admin-btn">View All Orders</a>
+                    <a href="orders.php" style="background: #e74c3c; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                        <i class="fas fa-eye"></i> View All Orders
+                    </a>
                 </div>
             </div>
         </div>

@@ -171,8 +171,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tbody>
                         <?php if (empty($products)): ?>
                             <tr>
-                                <td colspan="9" style="text-align: center; padding: 2rem; color: #666;">
-                                    No products found. <a href="add_product.php">Add your first product</a>
+                                <td colspan="11" style="text-align: center; padding: 2rem; color: #666;">
+                                    No products found. <a href="add_product.php" style="color: #e74c3c; text-decoration: none; font-weight: bold;">Add your first product</a>
                                 </td>
                             </tr>
                         <?php else: ?>

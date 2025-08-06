@@ -23,11 +23,39 @@ if (isset($_POST['update_status'])) {
     }
 }
 
-// Fetch all orders with customer details
-$stmt = $pdo->query("SELECT o.*, ocd.first_name, ocd.last_name, ocd.email, ocd.phone 
-                     FROM orders o 
-                     LEFT JOIN order_customer_details ocd ON o.order_id = ocd.order_id 
-                     ORDER BY o.created_at DESC");
+// Handle filters
+$statusFilter = $_GET['status'] ?? '';
+$paymentFilter = $_GET['payment'] ?? '';
+$searchTerm = $_GET['search'] ?? '';
+
+// Build query with filters
+$whereConditions = [];
+$params = [];
+
+if (!empty($statusFilter)) {
+    $whereConditions[] = "o.status = ?";
+    $params[] = $statusFilter;
+}
+
+if (!empty($paymentFilter)) {
+    $whereConditions[] = "o.payment_status = ?";
+    $params[] = $paymentFilter;
+}
+
+if (!empty($searchTerm)) {
+    $whereConditions[] = "(o.order_number LIKE ? OR ocd.first_name LIKE ? OR ocd.last_name LIKE ? OR ocd.email LIKE ?)";
+    $searchParam = "%$searchTerm%";
+    $params = array_merge($params, [$searchParam, $searchParam, $searchParam, $searchParam]);
+}
+
+$whereClause = !empty($whereConditions) ? 'WHERE ' . implode(' AND ', $whereConditions) : '';
+
+$stmt = $pdo->prepare("SELECT o.*, ocd.first_name, ocd.last_name, ocd.email, ocd.phone 
+                       FROM orders o 
+                       LEFT JOIN order_customer_details ocd ON o.order_id = ocd.order_id 
+                       $whereClause 
+                       ORDER BY o.created_at DESC");
+$stmt->execute($params);
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -187,7 +215,58 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             <?php endif; ?>
 
+            <!-- Filters -->
+            <div class="admin-container" style="margin-bottom: 2rem;">
+                <form method="GET" style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    <div>
+                        <label style="font-weight: bold; margin-right: 0.5rem;">Status:</label>
+                        <select name="status" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="">All Status</option>
+                            <option value="pending" <?php echo $statusFilter == 'pending' ? 'selected' : ''; ?>>Pending</option>
+                            <option value="processing" <?php echo $statusFilter == 'processing' ? 'selected' : ''; ?>>Processing</option>
+                            <option value="shipped" <?php echo $statusFilter == 'shipped' ? 'selected' : ''; ?>>Shipped</option>
+                            <option value="delivered" <?php echo $statusFilter == 'delivered' ? 'selected' : ''; ?>>Delivered</option>
+                            <option value="cancelled" <?php echo $statusFilter == 'cancelled' ? 'selected' : ''; ?>>Cancelled</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label style="font-weight: bold; margin-right: 0.5rem;">Payment:</label>
+                        <select name="payment" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="">All Payments</option>
+                            <option value="pending" <?php echo $paymentFilter == 'pending' ? 'selected' : ''; ?>>Pending</option>
+                            <option value="paid" <?php echo $paymentFilter == 'paid' ? 'selected' : ''; ?>>Paid</option>
+                            <option value="failed" <?php echo $paymentFilter == 'failed' ? 'selected' : ''; ?>>Failed</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label style="font-weight: bold; margin-right: 0.5rem;">Search:</label>
+                        <input type="text" name="search" value="<?php echo htmlspecialchars($searchTerm); ?>" 
+                               placeholder="Order number, customer name, email..." 
+                               style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 250px;">
+                    </div>
+                    
+                    <button type="submit" style="background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                    
+                    <a href="orders.php" style="background: #6c757d; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px;">
+                        <i class="fas fa-times"></i> Clear
+                    </a>
+                </form>
+            </div>
+
             <div class="admin-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3>Orders (<?php echo count($orders); ?> found)</h3>
+                    <div>
+                        <a href="reports.php" style="background: #27ae60; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; margin-right: 10px;">
+                            <i class="fas fa-chart-bar"></i> View Reports
+                        </a>
+                    </div>
+                </div>
+                
                 <table class="admin-table">
                     <thead>
                         <tr>
@@ -207,7 +286,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tbody>
                         <?php if (empty($orders)): ?>
                             <tr>
-                                <td colspan="8" style="text-align: center; padding: 2rem; color: #666;">
+                                <td colspan="11" style="text-align: center; padding: 2rem; color: #666;">
                                     No orders found.
                                 </td>
                             </tr>
