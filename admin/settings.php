@@ -245,7 +245,7 @@ $totalCustomers = $stmt->fetch()['total'];
             <!-- Admin Profile -->
             <div class="settings-container">
                 <div class="settings-section">
-                    <h3><i class="fas fa-user"></i> Admin Profile</h3>
+                    <h3><i class="fas fa-user"></i> Admin's Profile</h3>
                     <form method="POST">
                         <div class="form-group">
                             <label for="admin_name">Admin Name</label>
