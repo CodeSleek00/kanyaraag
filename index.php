@@ -11,9 +11,9 @@
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
   <link rel="stylesheet" href="style.css">
   <!-- Standard icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="images/कन्या.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/कन्या.png">
-<link rel="apple-touch-icon" sizes="180x180" href="images/कन्या.png">
+<link rel="icon" type="image/png" sizes="32x32" href="photos/कन्या.png">
+<link rel="icon" type="image/png" sizes="16x16" href="photos/कन्या.png">
+<link rel="apple-touch-icon" sizes="180x180" href="photos/कन्या.png">
 
 </head>
 <body>
