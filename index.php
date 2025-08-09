@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated News Ticker</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="sticky-header">
+  <div class="breaking-news-container">
+    <div class="news-items" id="newsItems">
+      <span class="news-item active">Big Sale starts tomorrow – up to 70% off!</span>
+      <span class="news-item">New arrivals just dropped in men's collection.</span>
+      <span class="news-item">Free shipping on orders above ₹999.</span>
+      <span class="news-item">Sign up and get ₹100 off on your first purchase!</span>
+    </div>
+  </div>
+
+  <header>
+    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+
+    <div class="menu">
+      <a href="#">Home</a>
+      <a href="#">Women</a>
+      <a href="#">Men</a>
+      <a href="#">Kids</a>
+      <a href="#">Collections</a>
+    </div>
+
+    <div class="brand"><span class="kanya">कन्या</span>Raag</div>
+
+    <div class="search-container">
+      <span class="search-placeholder">Search Bar</span>
+      <span class="search-rotate" id="rotateText">Lehenga</span>
+      <input type="text" aria-label="Search products" />
+    </div>
+  </header>
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="slides">
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+  </div>
+  <div class="click-area click-left"></div>
+  <div class="click-area click-right"></div>
+  <div class="dots"></div>
+</div>
+
+<!-- Icons -->
+<section class="icons-hero">
+  <div class="icon-box"><i class="fi fi-tr-shipping-fast"></i><p>24 Hours Dispatch</p></div>
+  <div class="icon-box"><i class="fi fi-tr-sewing-machine-alt"></i><p>Customise Design</p></div>
+  <div class="icon-box"><i class="fi fi-tr-benefit-porcent"></i><p>Best Prices</p></div>
+  <div class="icon-box"><i class="fi fi-tr-smile-plus"></i><p>24<small>X</small>7 Support</p></div>
+</section>
+
+<!-- Mobile Navigation Sidebar -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-sale-banner">
+    <h3>Summer Sale!</h3>
+    <p>Up to 60% off on selected items. Limited time offer!</p>
+  </div>
+  <a href="#"><i class="fas fa-home"></i> Home</a>
+  <a href="#"><i class="fas fa-female"></i> Women</a>
+  <a href="#"><i class="fas fa-male"></i> Men</a>
+  <a href="#"><i class="fas fa-child"></i> Kids</a>
+  <a href="#"><i class="fas fa-star"></i> Collections</a>
+  <a href="#"><i class="fas fa-percentage"></i> Sale</a>
+  <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+  <a href="#"><i class="fas fa-user"></i> Account</a>
+</div>
+
+<!-- Mobile Footer -->
+<footer class="mobile-footer">
+  <a href="#"><i class="fas fa-home"></i> Home</a>
+  <a href="#"><i class="fas fa-search"></i> Search</a>
+  <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+  <a href="#"><i class="fas fa-shopping-bag"></i> Cart</a>
+  <a href="#"><i class="fas fa-user"></i> Account</a>
+</footer>
+
+<!-- External JS -->
+<script src="script.js"></script>
+</body>
+</html>
