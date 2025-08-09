@@ -183,7 +183,7 @@
 
     @media (max-width: 768px) {
       body {
-        padding-top: 136px; /* Adjusted for mobile header height */
+        padding-top: 126px; /* Adjusted for mobile header height */
       }
       
       .menu {
