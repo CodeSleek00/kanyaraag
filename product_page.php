@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $original_price = $_POST['original_price'];
-    $discount_price = $_POST['discount_price'];
+    $discount_price = !empty($_POST['discount_price']) ? $_POST['discount_price'] : 0;
     $page = $_POST['page'];
     
     // Handle image upload
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sssdds", $target_file, $name, $description, $original_price, $discount_price, $page);
             
             if ($stmt->execute()) {
-                $success = "Product added successfully!";
+                $success = "Product added successfully to " . htmlspecialchars($page) . " page!";
             } else {
                 $error = "Error: " . $stmt->error;
             }
@@ -60,13 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .container { max-width: 600px; margin: 0 auto; }
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; }
-        input[type="text"], input[type="number"], textarea, select {
+        input[type="text"], input[type="number"], textarea {
             width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;
         }
         button { background: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
         button:hover { background: #45a049; }
         .error { color: red; }
         .success { color: green; }
+        .note { font-size: 12px; color: #666; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -98,23 +99,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             
             <div class="form-group">
-                <label for="original_price">Original Price:</label>
-                <input type="number" id="original_price" name="original_price" step="0.01" required>
+                <label for="original_price">Original Price (₹):</label>
+                <input type="number" id="original_price" name="original_price" step="0.01" min="0" required>
             </div>
             
             <div class="form-group">
-                <label for="discount_price">Discount Price (if any):</label>
-                <input type="number" id="discount_price" name="discount_price" step="0.01">
+                <label for="discount_price">Discount Price (₹):</label>
+                <input type="number" id="discount_price" name="discount_price" step="0.01" min="0">
+                <span class="note">Leave empty if no discount</span>
             </div>
             
             <div class="form-group">
                 <label for="page">Display Page:</label>
-                <select id="page" name="page" required>
-                    <option value="women.php">Women's Page</option>
-                    <option value="men.php">Men's Page</option>
-                    <option value="kids.php">Kids' Page</option>
-                    <option value="new_arrivals.php">New Arrivals</option>
-                </select>
+                <input type="text" id="page" name="page" required value="women.php">
+                <span class="note">Enter the page filename where this product should appear (e.g. women.php, men.php)</span>
             </div>
             
             <button type="submit">Add Product</button>
