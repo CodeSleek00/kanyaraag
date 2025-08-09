@@ -232,7 +232,7 @@
 
     @media (max-width: 480px) {
       body {
-        padding-top: 126px; /* Further adjustment for smaller screens */
+        padding-top: 106px; /* Further adjustment for smaller screens */
       }
       
       .breaking-news-container {
