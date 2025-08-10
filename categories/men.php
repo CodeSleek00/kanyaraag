@@ -1,5 +1,5 @@
 <?php
-require_once 'database_connect/db_connect.php';
+require_once '../database_connect/db_connect.php';
 
 // Fetch products for women's page
 $sql = "SELECT * FROM products WHERE page = 'men.php' ORDER BY id DESC";
