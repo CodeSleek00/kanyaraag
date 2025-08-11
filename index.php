@@ -80,7 +80,7 @@
   <a href="#"><i class="fas fa-home"></i> Home</a>
   <a href="#"><i class="fas fa-female"></i> Women</a>
   <a href="#"><i class="fa-solid fa-person-dress-burst"></i>Co-ord Set</a>
-  <a href="#"><img width="10" height="10" src="https://img.icons8.com/ios/50/slip-dress.png" alt="slip-dress"/> Kurtis</a>
+  <a href="#"><img width="20" height="20" src="https://img.icons8.com/ios/50/slip-dress.png" alt="slip-dress"/> Kurtis</a>
   <a href="#"><i class="fas fa-star"></i> Crop Top</a>
   <a href="#"><i class="fas fa-percentage"></i> Sale</a>
   <a href="#"><i class="fa-solid fa-truck"></i> Track Your Order</a>
