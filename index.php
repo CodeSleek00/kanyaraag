@@ -79,11 +79,11 @@
   </div>
   <a href="#"><i class="fas fa-home"></i> Home</a>
   <a href="#"><i class="fas fa-female"></i> Women</a>
-  <a href="#"><i class="fas fa-male"></i> Co-ord Set</a>
-  <a href="#"><i class="fas fa-child"></i> Kurtis</a>
+  <a href="#"><i class="fa-solid fa-person-dress-burst"></i>Co-ord Set</a>
+  <a href="#"><img width="50" height="50" src="https://img.icons8.com/ios/50/slip-dress.png" alt="slip-dress"/> Kurtis</a>
   <a href="#"><i class="fas fa-star"></i> Crop Top</a>
   <a href="#"><i class="fas fa-percentage"></i> Sale</a>
-  <a href="#"><i class="fas fa-heart"></i> Suggestions</a>
+  <a href="#"><i class="fa-solid fa-truck"></i> Track Your Order</a>
   <a href="#"><i class="fas fa-user"></i> Customize</a>
 </div>
 
