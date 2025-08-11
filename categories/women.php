@@ -50,16 +50,24 @@ $result = $conn->query($sql);
             font-size: 22px;
             font-weight: bold;
             color: #333;
-            margin-right: 35px; /* to balance back button space */
+            margin-right: 35px;
         }
 
         /* Product Grid */
         .products-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
             padding: 20px;
         }
+
+        @media (min-width: 768px) {
+            .products-container {
+                grid-template-columns: repeat(4, 1fr); /* Desktop: 4 per row */
+                gap: 25px;
+            }
+        }
+
         .product-card {
             background: white;
             border-radius: 10px;
@@ -67,12 +75,15 @@ $result = $conn->query($sql);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         .product-card:hover {
             transform: translateY(-5px);
         }
         .product-image-container {
-            height: 250px;
+            height: 200px;
             overflow: hidden;
             position: relative;
         }
@@ -102,16 +113,17 @@ $result = $conn->query($sql);
 
         .product-info {
             padding: 15px;
+            flex: 1;
         }
         .product-title {
-            font-size: 18px;
-            margin: 0 0 10px 0;
+            font-size: 16px;
+            margin: 0 0 5px 0;
             color: #333;
         }
         .product-description {
-            font-size: 14px;
+            font-size: 13px;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -120,18 +132,52 @@ $result = $conn->query($sql);
         .price-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .original-price {
             text-decoration: line-through;
             color: #999;
-            font-size: 14px;
+            font-size: 13px;
         }
         .discount-price {
             color: #e63946;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
         }
+
+        /* Buttons */
+        .product-actions {
+            display: flex;
+            gap: 5px;
+            padding: 10px 15px 15px 15px;
+        }
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .buy-now {
+            background-color: #ff6600;
+            color: white;
+        }
+        .buy-now:hover {
+            background-color: #e65c00;
+        }
+        .add-cart {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .add-cart:hover {
+            background-color: #45a049;
+        }
+
+        /* No products */
         .no-products {
             text-align: center;
             grid-column: 1 / -1;
@@ -185,6 +231,10 @@ $result = $conn->query($sql);
                                 <span class="discount-price">₹<?php echo number_format($row['original_price'], 2); ?></span>
                             <?php endif; ?>
                         </div>
+                    </div>
+                    <div class="product-actions">
+                        <a href="buy_now.php?id=<?php echo $row['id']; ?>" class="btn buy-now">Buy Now</a>
+                        <a href="add_to_cart.php?id=<?php echo $row['id']; ?>" class="btn add-cart">Add to Cart</a>
                     </div>
                 </div>
             <?php endwhile; ?>
