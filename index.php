@@ -81,7 +81,7 @@
   <a href="#"><i class="fas fa-female"></i> Women</a>
   <a href="#"><i class="fa-solid fa-person-dress-burst"></i>Co-ord Set</a>
   <a href="#"><img width="20" height="20" src="https://img.icons8.com/ios-filled/100/slip-dress.png" alt="slip-dress"/> Kurtis</a>
-  <a href="#"><i class="fas fa-star"></i> Crop Top</a>
+  <a href="#"><img width="20" height="20" src="https://img.icons8.com/external-victoruler-solid-victoruler/64/external-crop-top-clothes-and-outfit-victoruler-solid-victoruler.png" alt="external-crop-top-clothes-and-outfit-victoruler-solid-victoruler"/>Crop Top</a>
   <a href="#"><i class="fas fa-percentage"></i> Sale</a>
   <a href="#"><i class="fa-solid fa-truck"></i> Track Your Order</a>
   <a href="#"><i class="fas fa-user"></i> Customize</a>
