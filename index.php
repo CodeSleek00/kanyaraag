@@ -34,9 +34,10 @@
     <div class="menu">
       <a href="#">Home</a>
       <a href="#">Women</a>
-      <a href="#">Men</a>
-      <a href="#">Kids</a>
-      <a href="#">Collections</a>
+      <a href="#">Co-ord Set</a>
+      <a href="#">Crop Top</a>
+      <a href="#">Short Kurtis</a>
+      <a href="">Customize</a>
     </div>
 
     <div class="brand"><span class="kanya">कन्या</span>Raag</div>
