@@ -89,7 +89,7 @@
 
 <!-- Mobile Footer -->
 <footer class="mobile-footer">
-  <a href="#"  id="mobileMenuBtn"><i class="fas fa-home"></i> Home</a>
+  <button id="mobileMenuBtn"><i class="fas fa-home"></i> Home</button>
   <a href="#"><i class="fas fa-search"></i> Search</a>
   <a href="#"><i class="fas fa-heart"></i> Suggestions</a>
   <a href="#"><i class="fas fa-shopping-bag"></i> Cart</a>
