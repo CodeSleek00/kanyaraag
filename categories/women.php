@@ -16,9 +16,44 @@ $result = $conn->query($sql);
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f8f9fa;
-       
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: #333;
+            font-size: 20px;
+            margin-right: 15px;
+            background: #eee;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #ddd;
+        }
+        .header-title {
+            flex: 1;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-right: 35px; /* to balance back button space */
+        }
+
+        /* Product Grid */
         .products-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -31,6 +66,7 @@ $result = $conn->query($sql);
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            position: relative;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -38,6 +74,7 @@ $result = $conn->query($sql);
         .product-image-container {
             height: 250px;
             overflow: hidden;
+            position: relative;
         }
         .product-image {
             width: 100%;
@@ -48,6 +85,21 @@ $result = $conn->query($sql);
         .product-card:hover .product-image {
             transform: scale(1.05);
         }
+
+        /* Discount Badge */
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e63946;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
         .product-info {
             padding: 15px;
         }
@@ -102,12 +154,25 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
+
+    <!-- Header -->
+    <div class="header">
+        <a href="javascript:history.back()" class="back-btn">←</a>
+        <div class="header-title">Kanyaraag</div>
+    </div>
+
     <div class="products-container">
         <?php if ($result->num_rows > 0): ?>
             <?php while($row = $result->fetch_assoc()): ?>
                 <div class="product-card">
                     <div class="product-image-container">
                         <img src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="<?php echo htmlspecialchars($row['name']); ?>" class="product-image">
+                        <?php if ($row['discount_price'] > 0 && $row['original_price'] > $row['discount_price']): ?>
+                            <?php 
+                                $discountPercent = round((($row['original_price'] - $row['discount_price']) / $row['original_price']) * 100);
+                            ?>
+                            <div class="discount-badge"><?php echo $discountPercent; ?>% OFF</div>
+                        <?php endif; ?>
                     </div>
                     <div class="product-info">
                         <h3 class="product-title"><?php echo htmlspecialchars($row['name']); ?></h3>
