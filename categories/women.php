@@ -233,8 +233,8 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                     <div class="product-actions">
-                        <a href="buy_now.php?id=<?php echo $row['id']; ?>" class="btn buy-now">Buy Now</a>
-                        <a href="add_to_cart.php?id=<?php echo $row['id']; ?>" class="btn add-cart">Add to Cart</a>
+                        <a href="../order/buy_now.php?id=<?php echo $row['id']; ?>" class="btn buy-now">Buy Now</a>
+                        <a href="../order/add_to_cart.php?id=<?php echo $row['id']; ?>" class="btn add-cart">Add to Cart</a>
                     </div>
                 </div>
             <?php endwhile; ?>
