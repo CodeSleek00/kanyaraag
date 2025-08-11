@@ -79,12 +79,12 @@
   </div>
   <a href="#"><i class="fas fa-home"></i> Home</a>
   <a href="#"><i class="fas fa-female"></i> Women</a>
-  <a href="#"><i class="fas fa-male"></i> Men</a>
-  <a href="#"><i class="fas fa-child"></i> Kids</a>
-  <a href="#"><i class="fas fa-star"></i> Collections</a>
+  <a href="#"><i class="fas fa-male"></i> Co-ord Set</a>
+  <a href="#"><i class="fas fa-child"></i> Kurtis</a>
+  <a href="#"><i class="fas fa-star"></i> Crop Top</a>
   <a href="#"><i class="fas fa-percentage"></i> Sale</a>
-  <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
-  <a href="#"><i class="fas fa-user"></i> Account</a>
+  <a href="#"><i class="fas fa-heart"></i> Suggestions</a>
+  <a href="#"><i class="fas fa-user"></i> Customize</a>
 </div>
 
 <!-- Mobile Footer -->
