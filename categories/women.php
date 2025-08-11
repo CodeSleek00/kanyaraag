@@ -12,7 +12,94 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women's Collection</title>
-   
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+       
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image-container {
+            height: 250px;
+            overflow: hidden;
+        }
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        .product-info {
+            padding: 15px;
+        }
+        .product-title {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .product-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+        .discount-price {
+            color: #e63946;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .no-products {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 50px;
+            color: #666;
+        }
+        .add-product-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .add-product-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <div class="products-container">
