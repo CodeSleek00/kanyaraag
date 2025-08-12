@@ -182,9 +182,9 @@ header {
 
 /* Different breakpoint images */
 @media (min-width: 1025px) {
-  .slide:nth-child(1) { background-image: url('https://picsum.photos/id/1018/1920/800'); }
-  .slide:nth-child(2) { background-image: url('https://picsum.photos/id/1025/1920/800'); }
-  .slide:nth-child(3) { background-image: url('https://picsum.photos/id/1035/1920/800'); }
+  .slide:nth-child(1) { background-image: url('photos/1.png'); }
+  .slide:nth-child(2) { background-image: url('photos/3.png'); }
+  .slide:nth-child(3) { background-image: url('photos/2.png'); }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
