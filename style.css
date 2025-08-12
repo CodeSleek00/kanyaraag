@@ -194,9 +194,9 @@ header {
 }
 
 @media (max-width: 767px) {
-  .slide:nth-child(1) { background-image: url('https://picsum.photos/id/1067/800/1000'); }
-  .slide:nth-child(2) { background-image: url('https://picsum.photos/id/1074/800/1000'); }
-  .slide:nth-child(3) { background-image: url('https://picsum.photos/id/1084/800/1000'); }
+    .slide:nth-child(1) { background-image: url('photos/1.png'); }
+  .slide:nth-child(2) { background-image: url('photos/3.png'); }
+  .slide:nth-child(3) { background-image: url('photos/2.png'); }
 }
 
 /* Slider Navigation */
