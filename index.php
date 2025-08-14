@@ -64,7 +64,7 @@
 
 <!-- Icons -->
 <section class="icons-hero">
-  <div class="icon-box"><i class="fi fi-tr-shipping-fast"></i><p> Hours Dispatch</p></div>
+  <div class="icon-box"><i class="fi fi-tr-shipping-fast"></i><p>24 Hours Dispatch</p></div>
   <div class="icon-box"><i class="fi fi-tr-sewing-machine-alt"></i><p>Customise Design</p></div>
   <div class="icon-box"><i class="fi fi-tr-benefit-porcent"></i><p>Best Prices</p></div>
   <div class="icon-box"><i class="fi fi-tr-smile-plus"></i><p>24<small>X</small>7 Support</p></div>
