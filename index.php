@@ -73,7 +73,7 @@
 
   <div class="category-cards">
     <div class="card">
-      <img src="hero model 2.jpeg" alt="24 Hr Dispatch">
+      <img src="photos/1.jpg" alt="24 Hr Dispatch">
       <div class="card-content">
         <h3>24 Hr Dispatch</h3>
         <p>Quick fashion finds</p>
@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class="card">
-      <img src="hero model 2.jpeg" alt="Wedding Wardrobe">
+      <img src="photos/2.jpg" alt="Wedding Wardrobe">
       <div class="card-content">
         <h3>Wedding Wardrobe '25</h3>
         <p>Made for everyone, tailored for love</p>
@@ -97,7 +97,7 @@
       </div>
     </div>
     <div class="card">
-      <img src="hero model 2.jpeg" alt="Bestsellers">
+      <img src="photos/3.jpg" alt="Bestsellers">
       <div class="card-content">
         <h3>Bestsellers</h3>
         <p>Elevate your closet game</p>
