@@ -71,6 +71,35 @@
   <div class="icon-box"><i class="fi fi-tr-smile-plus"></i><p>24<small>X</small>7 Support</p></div>
 </section>
 
+
+
+<!-- Mobile Navigation Sidebar -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-sale-banner">
+    <h3>Summer Sale!</h3>
+    <p>Up to 60% off on selected items. Limited time offer!</p>
+  </div>
+  <a href="#"><i class="fas fa-home"></i> Home</a>
+  <a href="#"><i class="fas fa-female"></i> Women</a>
+  <a href="#"><i class="fa-solid fa-person-dress-burst"></i>Co-ord Set</a>
+  <a href="#"><img width="20" height="20" src="https://img.icons8.com/ios-filled/100/slip-dress.png" alt="slip-dress"/> Kurtis</a>
+  <a href="#"><img width="20" height="20" src="https://img.icons8.com/external-victoruler-solid-victoruler/64/external-crop-top-clothes-and-outfit-victoruler-solid-victoruler.png" alt="external-crop-top-clothes-and-outfit-victoruler-solid-victoruler"/>Crop Top</a>
+  <a href="#"><i class="fas fa-percentage"></i> Sale</a>
+  <a href="#"><i class="fa-solid fa-truck"></i> Track Your Order</a>
+  <a href="#"><i class="fas fa-user"></i> Customize</a>
+</div>
+
+<!-- Mobile Footer -->
+<footer class="mobile-footer">
+  <a href="#"><i class="fas fa-home"></i> Home</a>
+  <a href="#"><i class="fas fa-search"></i> Search</a>
+  <a href="#"><i class="fas fa-heart"></i> Suggestions</a>
+  <a href="#"><i class="fas fa-shopping-bag"></i> Cart</a>
+  <a href="#"><i class="fas fa-percentage"></i> Sale</a>
+</footer>
+
+
   <div class="category-cards">
     <div class="card">
       <img src="hero model 2.jpeg" alt="24 Hr Dispatch">
@@ -105,34 +134,6 @@
       </div>
     </div>
   </div>
-
-
-
-<!-- Mobile Navigation Sidebar -->
-<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
-<div class="mobile-nav" id="mobileNav">
-  <div class="mobile-sale-banner">
-    <h3>Summer Sale!</h3>
-    <p>Up to 60% off on selected items. Limited time offer!</p>
-  </div>
-  <a href="#"><i class="fas fa-home"></i> Home</a>
-  <a href="#"><i class="fas fa-female"></i> Women</a>
-  <a href="#"><i class="fa-solid fa-person-dress-burst"></i>Co-ord Set</a>
-  <a href="#"><img width="20" height="20" src="https://img.icons8.com/ios-filled/100/slip-dress.png" alt="slip-dress"/> Kurtis</a>
-  <a href="#"><img width="20" height="20" src="https://img.icons8.com/external-victoruler-solid-victoruler/64/external-crop-top-clothes-and-outfit-victoruler-solid-victoruler.png" alt="external-crop-top-clothes-and-outfit-victoruler-solid-victoruler"/>Crop Top</a>
-  <a href="#"><i class="fas fa-percentage"></i> Sale</a>
-  <a href="#"><i class="fa-solid fa-truck"></i> Track Your Order</a>
-  <a href="#"><i class="fas fa-user"></i> Customize</a>
-</div>
-
-<!-- Mobile Footer -->
-<footer class="mobile-footer">
-  <a href="#"><i class="fas fa-home"></i> Home</a>
-  <a href="#"><i class="fas fa-search"></i> Search</a>
-  <a href="#"><i class="fas fa-heart"></i> Suggestions</a>
-  <a href="#"><i class="fas fa-shopping-bag"></i> Cart</a>
-  <a href="#"><i class="fas fa-percentage"></i> Sale</a>
-</footer>
 
 <!-- External JS -->
 <script src="script.js"></script>
