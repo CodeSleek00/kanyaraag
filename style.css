@@ -409,8 +409,7 @@ header {
   font-size: 34px;
   margin-right: 8px;
 }
-
-    .category-cards {
+.category-cards {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
@@ -468,6 +467,18 @@ header {
       color: white;
     }
 
+    /* Tablet */
+    @media (max-width: 992px) {
+      .category-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    /* Mobile */
+    @media (max-width: 576px) {
+      .category-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 /* Responsive Adjustments */
 @media (max-width: 992px) {
   header {
