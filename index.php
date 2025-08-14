@@ -62,6 +62,15 @@
   <div class="dots"></div>
 </div>
 
+
+<!-- Icons -->
+<section class="icons-hero">
+  <div class="icon-box"><i class="fi fi-tr-shipping-fast"></i><p>24 Hours Dispatch</p></div>
+  <div class="icon-box"><i class="fi fi-tr-sewing-machine-alt"></i><p>Customise Design</p></div>
+  <div class="icon-box"><i class="fi fi-tr-benefit-porcent"></i><p>Best Prices</p></div>
+  <div class="icon-box"><i class="fi fi-tr-smile-plus"></i><p>24<small>X</small>7 Support</p></div>
+</section>
+
   <div class="category-cards">
     <div class="card">
       <img src="hero model 2.jpeg" alt="24 Hr Dispatch">
@@ -96,15 +105,6 @@
       </div>
     </div>
   </div>
-
-<!-- Icons -->
-<section class="icons-hero">
-  <div class="icon-box"><i class="fi fi-tr-shipping-fast"></i><p>24 Hours Dispatch</p></div>
-  <div class="icon-box"><i class="fi fi-tr-sewing-machine-alt"></i><p>Customise Design</p></div>
-  <div class="icon-box"><i class="fi fi-tr-benefit-porcent"></i><p>Best Prices</p></div>
-  <div class="icon-box"><i class="fi fi-tr-smile-plus"></i><p>24<small>X</small>7 Support</p></div>
-</section>
-
 <!-- Mobile Navigation Sidebar -->
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 <div class="mobile-nav" id="mobileNav">
