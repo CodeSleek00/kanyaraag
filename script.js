@@ -93,3 +93,15 @@ document.querySelector('.click-right').addEventListener('click', () => { nextSli
 
 updateSlide();
 startAutoSlide();
+ // Reveal cards when they enter the viewport
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Animate only once
+        }
+      });
+    }, { threshold: 0.2 });
+
+    cards.forEach(card => observer.observe(card));
