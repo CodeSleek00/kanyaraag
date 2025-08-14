@@ -14,7 +14,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="category.css" />
+  <link rel="stylesheet" href="caegory.css" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/jpg" sizes="32x32" href="photos/क.jpg" />
