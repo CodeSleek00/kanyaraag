@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="category.css">
   <!-- Standard icons -->
 <link rel="icon" type="image/jpg" sizes="32x32" href="photos/क.jpg">
 <link rel="icon" type="image/jpg" sizes="16x16" href="photos/क.jpg">
