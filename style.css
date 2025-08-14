@@ -8,10 +8,9 @@
 body {
   font-family: 'Outfit', sans-serif;
   line-height: 1.6;
-  padding-top: 96px; /* Account for sticky header height */
+  padding-top: 96px; /* Account for sticky header height on desktop */
 }
 
-/* Utility Classes */
 .kanya {
   color: #C75D2c;
 }
@@ -74,6 +73,7 @@ header {
   flex-wrap: wrap;
   border-bottom: 1px solid #ddd;
   gap: 15px;
+  position: relative; /* FIX: ensures .brand stays inside header */
 }
 
 .menu {
@@ -82,7 +82,6 @@ header {
   order: 1;
   flex-grow: 1;
   justify-content: flex-start;
-  padding-left: 0px;
 }
 
 .menu a {
@@ -148,6 +147,7 @@ header {
   color: #666;
   font-size: 14px;
   animation: fadeInOut 8s infinite;
+  -webkit-animation: fadeInOut 8s infinite; /* Added vendor prefix */
   min-width: 60px;
 }
 
@@ -187,14 +187,8 @@ header {
   .slide:nth-child(3) { background-image: url('photos/2.jpg'); }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
   .slide:nth-child(1) { background-image: url('photos/1.jpg'); }
-  .slide:nth-child(2) { background-image: url('photos/3.jpg'); }
-  .slide:nth-child(3) { background-image: url('photos/2.jpg'); }
-}
-
-@media (max-width: 767px) {
-    .slide:nth-child(1) { background-image: url('photos/1.jpg'); }
   .slide:nth-child(2) { background-image: url('photos/3.jpg'); }
   .slide:nth-child(3) { background-image: url('photos/2.jpg'); }
 }
@@ -409,77 +403,75 @@ header {
   font-size: 34px;
   margin-right: 8px;
 }
-.category-cards {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      position: relative;
-      opacity: 0;
-      transform: translateY(-40px);
-      transition: all 0.6s ease;
-    }
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .card-content {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      color: rgb(231, 217, 217);
-      padding: 12px;
-    }
-    .card h3 {
-      margin: 0 0 5px 0;
-      font-size: 16px;
-    }
-    .card p {
-      margin: 0 0 10px 0;
-      font-size: 13px;
-      color: #ffffff;
-    }
-    .card button {
-      background: white;
-      color: black;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .card button:hover {
-      background: black;
-      color: white;
-    }
 
-    /* Tablet */
-    @media (max-width: 992px) {
-      .category-cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    /* Mobile */
-    @media (max-width: 576px) {
-      .category-cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-/* Responsive Adjustments */
+/* Category Cards */
+.category-cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: relative;
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: all 0.6s ease;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #fff;
+  background: rgba(0,0,0,0.4); /* FIX: added overlay for readability */
+  padding: 12px;
+}
+
+.card h3 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+
+.card p {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+}
+
+.card button {
+  background: white;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card button:hover {
+  background: black;
+  color: white;
+}
+
+/* Responsive Media Queries */
 @media (max-width: 992px) {
   header {
     padding: 15px 20px;
@@ -496,16 +488,19 @@ header {
   .search-rotate {
     left: 80px;
   }
+
+  .category-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   body {
-    padding-top: 126px; /* Adjusted for mobile header height */
+    padding-top: 126px;
   }
-  
+
   .menu {
     display: none;
-    width: 100%;
     flex-direction: column;
     gap: 10px;
     padding: 10px 0;
@@ -526,7 +521,6 @@ header {
     order: 2;
     flex-grow: 1;
     text-align: center;
-    padding-left: 0;
   }
 
   .search-container {
@@ -550,21 +544,17 @@ header {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.8rem;
   }
-  
+
   .icon-box i {
     font-size: 2.2rem;
   }
-  
+
   .icon-box p {
     font-size: 0.85rem;
   }
 
   .mobile-nav-toggle {
     display: block;
-  }
-  
-  .menu {
-    padding-left: 0;
   }
 
   .mobile-footer {
@@ -574,9 +564,9 @@ header {
 
 @media (max-width: 480px) {
   body {
-    padding-top: 100px; /* Further adjustment for smaller screens */
+    padding-top: 100px;
   }
-  
+
   .breaking-news-container {
     padding: 10px 15px;
   }
