@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Category Cards with Animation</title>
+  <title>Responsive Cards</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,11 +11,11 @@
       padding: 20px;
       background-color: blanchedalmond;
     }
-    .category-cards {
+    .container {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, 1fr); /* 4 cards on desktop */
       gap: 20px;
     }
     .card {
@@ -24,17 +24,10 @@
       overflow: hidden;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       position: relative;
-      opacity: 0;
-      transform: translateY(-40px);
-      transition: all 0.6s ease;
-    }
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
     .card img {
       width: 100%;
-      height: auto;
+      height: auto; /* Allow natural height */
       display: block;
     }
     .card-content {
@@ -42,8 +35,9 @@
       bottom: 0;
       left: 0;
       right: 0;
-      color: rgb(231, 217, 217);
+      color: rgb(8, 7, 7);
       padding: 12px;
+
     }
     .card h3 {
       margin: 0 0 5px 0;
@@ -52,7 +46,7 @@
     .card p {
       margin: 0 0 10px 0;
       font-size: 13px;
-      color: #ffffff;
+      color: #191313;
     }
     .card button {
       background: white;
@@ -69,23 +63,23 @@
       color: white;
     }
 
-    /* Tablet */
+    /* Tablet (2 cards per row) */
     @media (max-width: 992px) {
-      .category-cards {
+      .container {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    /* Mobile */
+
+    /* Mobile (2 cards per row) */
     @media (max-width: 576px) {
-      .category-cards {
+      .container {
         grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
 </head>
 <body>
-
-  <div class="category-cards">
+  <div class="container">
     <div class="card">
       <img src="hero model 2.jpeg" alt="24 Hr Dispatch">
       <div class="card-content">
@@ -95,7 +89,7 @@
       </div>
     </div>
     <div class="card">
-      <img src="hero model 2.jpeg" alt="Wedding Wardrobe">
+      <img src="images/2webp.webp" alt="Wedding Wardrobe">
       <div class="card-content">
         <h3>Wedding Wardrobe '25</h3>
         <p>Made for everyone, tailored for love</p>
@@ -103,7 +97,7 @@
       </div>
     </div>
     <div class="card">
-      <img src="hero model 2.jpeg" alt="Independence Specials">
+      <img src="images/1.jpg" alt="Independence Specials">
       <div class="card-content">
         <h3>Independence Specials</h3>
         <p>Freedom looks good on us</p>
@@ -111,7 +105,7 @@
       </div>
     </div>
     <div class="card">
-      <img src="hero model 2.jpeg" alt="Bestsellers">
+      <img src="images/3.webp" alt="Bestsellers">
       <div class="card-content">
         <h3>Bestsellers</h3>
         <p>Elevate your closet game</p>
@@ -119,21 +113,5 @@
       </div>
     </div>
   </div>
-
-  <script>
-    // Reveal cards when they enter the viewport
-    const cards = document.querySelectorAll('.card');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Animate only once
-        }
-      });
-    }, { threshold: 0.2 });
-
-    cards.forEach(card => observer.observe(card));
-  </script>
-
 </body>
 </html>

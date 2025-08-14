@@ -62,7 +62,6 @@
   <div class="dots"></div>
 </div>
 
-
 <!-- Icons -->
 <section class="icons-hero">
   <div class="icon-box"><i class="fi fi-tr-shipping-fast"></i><p>24 Hours Dispatch</p></div>
@@ -71,40 +70,6 @@
   <div class="icon-box"><i class="fi fi-tr-smile-plus"></i><p>24<small>X</small>7 Support</p></div>
 </section>
 
-  <div class="category-cards">
-    <div class="card">
-      <img src="photos/1.jpg" alt="24 Hr Dispatch">
-      <div class="card-content">
-        <h3>24 Hr Dispatch</h3>
-        <p>Quick fashion finds</p>
-        <button>Shop Now</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="photos/2.jpg" alt="Wedding Wardrobe">
-      <div class="card-content">
-        <h3>Wedding Wardrobe '25</h3>
-        <p>Made for everyone, tailored for love</p>
-        <button>Shop Now</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="12.jpeg" alt="Independence Specials">
-      <div class="card-content">
-        <h3>Independence Specials</h3>
-        <p>Freedom looks good on us</p>
-        <button>Shop Now</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="photos/3.jpg" alt="Bestsellers">
-      <div class="card-content">
-        <h3>Bestsellers</h3>
-        <p>Elevate your closet game</p>
-        <button>Shop Now</button>
-      </div>
-    </div>
-  </div>
 <!-- Mobile Navigation Sidebar -->
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 <div class="mobile-nav" id="mobileNav">
