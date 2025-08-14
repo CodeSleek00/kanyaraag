@@ -89,7 +89,7 @@
       </div>
     </div>
     <div class="card">
-      <img src="hero model 2.jpeg" alt="Independence Specials">
+      <img src="12.jpeg" alt="Independence Specials">
       <div class="card-content">
         <h3>Independence Specials</h3>
         <p>Freedom looks good on us</p>
