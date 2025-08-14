@@ -62,6 +62,41 @@
   <div class="dots"></div>
 </div>
 
+  <div class="category-cards">
+    <div class="card">
+      <img src="hero model 2.jpeg" alt="24 Hr Dispatch">
+      <div class="card-content">
+        <h3>24 Hr Dispatch</h3>
+        <p>Quick fashion finds</p>
+        <button>Shop Now</button>
+      </div>
+    </div>
+    <div class="card">
+      <img src="hero model 2.jpeg" alt="Wedding Wardrobe">
+      <div class="card-content">
+        <h3>Wedding Wardrobe '25</h3>
+        <p>Made for everyone, tailored for love</p>
+        <button>Shop Now</button>
+      </div>
+    </div>
+    <div class="card">
+      <img src="hero model 2.jpeg" alt="Independence Specials">
+      <div class="card-content">
+        <h3>Independence Specials</h3>
+        <p>Freedom looks good on us</p>
+        <button>Shop Now</button>
+      </div>
+    </div>
+    <div class="card">
+      <img src="hero model 2.jpeg" alt="Bestsellers">
+      <div class="card-content">
+        <h3>Bestsellers</h3>
+        <p>Elevate your closet game</p>
+        <button>Shop Now</button>
+      </div>
+    </div>
+  </div>
+
 <!-- Icons -->
 <section class="icons-hero">
   <div class="icon-box"><i class="fi fi-tr-shipping-fast"></i><p>24 Hours Dispatch</p></div>
