@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Responsive Cards</title>
+  <link rel="stylesheet" href="test.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,25 +13,31 @@
       padding: 20px;
       background-color: blanchedalmond;
     }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4 cards on desktop */
+      grid-template-columns: repeat(4, 1fr);
+      /* 4 cards on desktop */
       gap: 20px;
     }
+
     .card {
       background: white;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       position: relative;
     }
+
     .card img {
       width: 100%;
-      height: auto; /* Allow natural height */
+      height: auto;
+      /* Allow natural height */
       display: block;
     }
+
     .card-content {
       position: absolute;
       bottom: 0;
@@ -39,15 +47,18 @@
       padding: 12px;
 
     }
+
     .card h3 {
       margin: 0 0 5px 0;
       font-size: 16px;
     }
+
     .card p {
       margin: 0 0 10px 0;
       font-size: 13px;
       color: #191313;
     }
+
     .card button {
       background: white;
       color: black;
@@ -58,6 +69,7 @@
       cursor: pointer;
       transition: 0.3s;
     }
+
     .card button:hover {
       background: black;
       color: white;
@@ -78,6 +90,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div class="card">
@@ -112,6 +125,43 @@
         <button>Shop Now</button>
       </div>
     </div>
+
+    <div>
+      <section class="occasion-section">
+        <h2>Shop By Occasion</h2>
+        <div class="occasion-grid">
+          <!-- Large Wedding Image -->
+          <div class="occasion-card large" style="background-image: url('images/17546283745131new.webp');">
+            <div class="overlay">Wedding</div>
+          </div>
+
+          <!-- Other Images -->
+          <div class="occasion-card" style="background-image: url('images/1754290769857sangeet.avif');">
+            <div class="overlay">Sangeet</div>
+          </div>
+
+          <div class="occasion-card" style="background-image: url('images/1754634820049reception-and-cocktail.avif');">
+            <div class="overlay">Reception & Cocktail</div>
+          </div>
+
+          <div class="occasion-card" style="background-image: url('images/17534683589594.avif');">
+            <div class="overlay">Mehendi</div>
+          </div>
+
+          <div>
+            <div class="occasion-card small1"
+              style="background-image: url('images/17534691360621-nitika-gujralnew.avif');">
+              <div class="overlay">Roka</div>
+            </div>
+
+            <div class="occasion-card small2" style="background-image: url('images/17546284600426new.webp');">
+              <div class="overlay">Bridal Trousseau</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </body>
+
 </html>
