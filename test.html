@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Responsive Cards</title>
-  <link rel="stylesheet" href="test.css">
+  <!-- <link rel="stylesheet" href="test.css"> -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,72 +17,72 @@
 
     /* Shop by occasion */
 
-.occasion-section {
-    padding: 20px;
-    max-width: 1400px;
-    margin: auto;
-}
+    .occasion-section {
+      padding: 20px;
+      max-width: 1400px;
+      margin: auto;
+    }
 
-.occasion-section h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
+    .occasion-section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
 
-.occasion-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 250px;
-    gap: 15px;
-}
+    .occasion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 250px;
+      gap: 15px;
+    }
 
-.occasion-card {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.4s ease;
-}
+    .occasion-card {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
 
-.occasion-card.large {
-    grid-row: span 2;
-}
+    .occasion-card.large {
+      grid-row: span 2;
+    }
 
-.occasion-card.small1 {
-    height: 250px;
-    width: 224px;
-    float: left;
-}
+    .occasion-card.small1 {
+      height: 250px;
+      width: 224px;
+      float: left;
+    }
 
-.occasion-card.small2 {
-    height: 250px;
-    width: 224px;
-    float: right;
-}
+    .occasion-card.small2 {
+      height: 250px;
+      width: 224px;
+      float: right;
+    }
 
-.occasion-card:hover {
-    transform: scale(1.05);
-}
+    .occasion-card:hover {
+      transform: scale(1.05);
+    }
 
-.overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    text-align: center;
-    padding: 10px;
-    font-size: 18px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
 
-.occasion-card:hover .overlay {
-    opacity: 1;
-}
+    .occasion-card:hover .overlay {
+      opacity: 1;
+    }
 
 
 
