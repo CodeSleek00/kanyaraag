@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +16,10 @@
       font-size: 28px;
       margin-bottom: 20px;
       font-weight: bold;
+      text-align: center;
     }
 
+    /* Desktop Grid (3 columns) */
     .occasion-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -28,20 +29,49 @@
 
     .occasion-card {
       position: relative;
-      background-size: cover;
-      background-position: center;
       border-radius: 8px;
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.4s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
+    .occasion-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.3);
+      transition: background 0.3s ease;
+      z-index: 1;
+    }
+
+    .occasion-card:hover::before {
+      background: rgba(0,0,0,0.1);
+    }
+
+    .occasion-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Special styling for the wedding card */
     .occasion-card.large {
       grid-row: span 2;
     }
 
+    /* Make sure wedding image fills properly */
+    .occasion-card.large img {
+      object-position: center top;
+    }
+
     .occasion-card:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
 
     .overlay {
@@ -49,92 +79,96 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
       color: white;
       text-align: center;
-      padding: 10px;
-      font-size: 18px;
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      padding: 20px 10px;
+      font-size: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 2;
     }
 
-    .occasion-card:hover .overlay {
-      opacity: 1;
-    }
-
-    /* 📱 Mobile Responsive */
+    /* Mobile Layout */
     @media (max-width: 768px) {
       .occasion-grid {
-        grid-template-columns: 1fr; /* एक कॉलम */
-        grid-auto-rows: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
       }
 
-      .occasion-card.large {
-        grid-row: auto; /* main image normal row */
-        height: 300px;
-      }
-
-      /* बाकी images का order set */
-      .occasion-card:nth-child(2),
-      .occasion-card:nth-child(3) {
-        display: inline-block;
-        width: 48%;
-        height: 200px;
-        margin: 1%;
-      }
-
-      .occasion-card:nth-child(4),
-      .occasion-card:nth-child(5) {
-        display: inline-block;
-        width: 48%;
-        height: 200px;
-        margin: 1%;
-      }
-
-      .occasion-card:nth-child(6) {
+      .occasion-card {
         width: 100%;
-        height: 220px;
-        margin-top: 10px;
+        height: 150px;
+      }
+
+      /* Wedding card should be same height as others on mobile */
+      .occasion-card.large {
+        height: 150px;
+      }
+
+      /* Next 4 cards take half width */
+      .occasion-card:nth-child(n+2):nth-child(-n+5) {
+        width: calc(50% - 5px);
+      }
+
+      .overlay {
+        padding: 15px 10px;
+        font-size: 16px;
+      }
+    }
+
+    /* For very small screens */
+    @media (max-width: 480px) {
+      .occasion-card {
+        height: 120px;
+      }
+      
+      .occasion-card.large {
+        height: 120px;
+      }
+      
+      .overlay {
+        font-size: 14px;
+        padding: 10px 5px;
       }
     }
   </style>
 </head>
-
 <body>
-
   <div>
     <section class="occasion-section">
       <h2>Shop By Occasion</h2>
       <div class="occasion-grid">
-        <!-- Large Wedding Image -->
-        <div class="occasion-card large" style="background-image: url('images/17546283745131new.webp');">
+        <!-- Wedding Card (Large on desktop) -->
+        <div class="occasion-card large">
+          <img src="images/17546283745131new.webp" alt="Wedding Collection">
           <div class="overlay">Wedding</div>
         </div>
 
-        <!-- Other Images -->
-        <div class="occasion-card" style="background-image: url('images/1754290769857sangeet.avif');">
+        <!-- Other Cards -->
+        <div class="occasion-card">
+          <img src="images/1754290769857sangeet.avif" alt="Sangeet Collection">
           <div class="overlay">Sangeet</div>
         </div>
 
-        <div class="occasion-card" style="background-image: url('images/1754634820049reception-and-cocktail.avif');">
+        <div class="occasion-card">
+          <img src="images/1754634820049reception-and-cocktail.avif" alt="Reception Collection">
           <div class="overlay">Reception & Cocktail</div>
         </div>
 
-        <div class="occasion-card" style="background-image: url('images/17534683589594.avif');">
+        <div class="occasion-card">
+          <img src="images/17534683589594.avif" alt="Mehendi Collection">
           <div class="overlay">Mehendi</div>
         </div>
 
-        <div class="occasion-card" style="background-image: url('images/17534691360621-nitika-gujralnew.avif');">
+        <div class="occasion-card">
+          <img src="images/17534691360621-nitika-gujralnew.avif" alt="Roka Collection">
           <div class="overlay">Roka</div>
-        </div>
-
-        <div class="occasion-card" style="background-image: url('images/17546284600426new.webp');">
-          <div class="overlay">Bridal Trousseau</div>
         </div>
       </div>
     </section>
   </div>
-
 </body>
-
 </html>
