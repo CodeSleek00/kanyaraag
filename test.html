@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Responsive Cards</title>
-  <!-- <link rel="stylesheet" href="test.css"> -->
+  <link rel="stylesheet" href="test.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -85,6 +85,130 @@
     }
 
 
+    /* cards */
+
+    /* Section */
+    .spotlight-section {
+      max-width: 1400px;
+      margin: auto;
+      position: relative;
+    }
+
+    .spotlight-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .spotlight-header h2 {
+      font-size: 32px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .spotlight-header button {
+      border: 1px solid #000;
+      background: transparent;
+      padding: 6px 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .spotlight-header button:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    /* Carousel */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    /* Cards */
+    .designer-card {
+      min-width: 240px;
+      max-width: 240px;
+      height: 360px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-right: 20px;
+      position: relative;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .designer-card:hover {
+      transform: scale(1.05);
+    }
+
+    .designer-name {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    }
+
+    /* Arrows */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 22px;
+      color: #000;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 10px 14px;
+      z-index: 2;
+      user-select: none;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s;
+    }
+
+    .arrow:hover {
+      background: #ddd;
+    }
+
+    .arrow.left {
+      left: -20px;
+    }
+
+    .arrow.right {
+      right: -20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .designer-card {
+        min-width: 180px;
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .designer-card {
+        min-width: 550px;
+        height: 240px;
+      }
+    }
+
+
 
     /* Responsive */
     @media (max-width: 992px) {
@@ -144,8 +268,60 @@
         </div>
       </div>
     </section>
+    <div>
+
+      <section class="spotlight-section">
+        <!-- Header -->
+        <div class="spotlight-header">
+          <h2>Designers In The Spotlight</h2>
+          <button>View All</button>
+        </div>
+
+        <!-- Arrows -->
+        <div class="arrow left" onclick="moveSlide(-5)">&#10094;</div>
+        <div class="arrow right" onclick="moveSlide(5)">&#10095;</div>
+
+        <!-- Carousel -->
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="designer-card" style="background-image: url('images/dress1.avif');">
+              <div class="designer-name">Rohit Gandhi + Rahul Khanna</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress2.webp');">
+              <div class="designer-name">Mayyur Girotra Couture</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress3.avif');">
+              <div class="designer-name">Two Sisters By Gyans</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress4.avif');">
+              <div class="designer-name">Matsya</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress5.avif');">
+              <div class="designer-name">Sue Mue</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress10.avif');">
+              <div class="designer-name">Rohit Gandhi</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress8.avif');">
+              <div class="designer-name">Torien</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress7.avif');">
+              <div class="designer-name">Sue Mue</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress1.avif');">
+              <div class="designer-name">Sue Mue</div>
+            </div>
+            <div class="designer-card" style="background-image: url('images/dress3.avif');">
+              <div class="designer-name">Sue Mue</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
   </div>
+
+  <script src="test.js"></script>
 </body>
 
 </html>
